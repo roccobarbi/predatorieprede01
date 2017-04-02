@@ -42,7 +42,7 @@ public class Preda extends Organismo {
 			if(available > 0){
 				destination = (int)(Math.random() * available); // 0, 1, 2 or 3
 				for(int i = 1; i < 8 && destination >= 0; i += 2){ 
-					offspring++;
+					if(destination == 0) offspring = i;
 					if(grid[i] == null) destination--;
 				}
 			}
