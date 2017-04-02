@@ -6,6 +6,7 @@ public abstract class Organismo {
 	private String species;
 	private int age;
 	private int nextOffspring;
+	private char representation; // a character that represents this organism on the screen
 
 	// Accessors
 	/**
@@ -31,6 +32,34 @@ public abstract class Organismo {
 	 */
 	public void setAge(int age) {
 		this.age = age;
+	}
+	/**
+	 * @return the character used to represent this organism on screen
+	 */
+	public int getRepresentation() {
+		return representation;
+	}
+	/**
+	 * @param	representation	the representation to set
+	 */
+	public void setRepresentation(char representation) {
+		this.representation = representation;
+	}
+	
+	// Constructors
+	public Organismo(){
+		this("noName", "noSpecies", 'g');
+	}
+	public Organismo(String name){
+		this(name, "noSpecies", 'g');
+	}
+	public Organismo(String name, char representation){
+		this(name, "noSpecies", representation);
+	}
+	public Organismo(String name, String species, char representation){
+		this.name = name;
+		this.species = species;
+		this.representation = representation;
 	}
 	
 	// Public methods
@@ -60,6 +89,12 @@ public abstract class Organismo {
 		}
 		return move;
 	};
+	/**
+	 * It prints on screen the character that represents this organism.
+	 */
+	public void print(){
+		System.out.print(representation);
+	}
 	
 	// Abstract methods
 	public abstract void reproduce();
