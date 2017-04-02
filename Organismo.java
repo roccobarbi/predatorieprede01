@@ -5,7 +5,7 @@ public abstract class Organismo {
 	private String name;
 	private String species;
 	private int age;
-	private int nextOffspring;
+	protected int nextOffspring;
 	private char representation; // a character that represents this organism on the screen
 
 	// Accessors
@@ -97,5 +97,5 @@ public abstract class Organismo {
 	}
 	
 	// Abstract methods
-	public abstract void reproduce();
+	public abstract int reproduce(char[] grid);
 }
