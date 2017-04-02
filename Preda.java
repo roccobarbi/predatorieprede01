@@ -30,20 +30,20 @@ public class Preda extends Organismo {
 	 * @param	grid	the 8 adjacent cells, starting from the top left clockwise, represented as chars (space = empty).
 	 * @return	-1 if no offspring is born, or the direction (0 = N, 1 = E, 2 = S, 3 = W)
 	 */
-	public int reproduce(char[] grid){
+	public int reproduce(Organismo[] grid){
 		int offspring = -1;
 		int available = -1;
 		int destination = -1;
 		if(nextOffspring == 0){
 			for(int i = 1; i < 8; i +=2){
-				if(grid[i] == ' ') available++; // check if the cell is empty and flag it as available
+				if(grid[i] == null) available++; // check if the cell is empty and flag it as available
 			}
 			// If there are available cells, chose one and spawn there
 			if(available > 0){
 				destination = (int)(Math.random() * available); // 0, 1, 2 or 3
 				for(int i = 1; i < 8 && destination >= 0; i += 2){ 
 					offspring++;
-					if(grid[i] == ' ') destination--;
+					if(grid[i] == null) destination--;
 				}
 			}
 			nextOffspring = originalNextOffspring;
