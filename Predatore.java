@@ -62,6 +62,17 @@ public class Predatore extends Organismo {
 		this.originalDaysUntilStarve = daysUntilStarve;
 		this.isAlive = true;
 	}
+	
+	// Private methods
+	/**
+	 * It resets the days before starvation.
+	 * @param	move	the direction where the beast moves to hunt
+	 * @return	the direction where the beast moved to hund
+	 */
+	private int hunt(int move){
+		daysUntilStarve = originalDaysUntilStarve;
+		return move;
+	}
 
 	// Public methods
 	/**
@@ -93,22 +104,22 @@ public class Predatore extends Organismo {
 	};
 	
 	/**
-	 * The organism is always looking for food and it wants to move.
+	 * The predator is always looking for food and it wants to move.
 	 * If there is a prey inside an adjacent cell, it moves there.
-	 * Otherwise, if there is a pray in an angle cell, it moves to the nearest movable cell.
-	 * Otherwise, it moves in a random direction chosen from the available ones.
+	 * Otherwise it's a naive predator: it moves in a random direction chosen from the available ones.
 	 * @param	grid	the 8 adjacent cells, starting from the top left clockwise, represented as chars (space = empty).
 	 * @return	-1 if no move is made, -10 if the predator is dead, or the direction (0 = N, 1 = E, 2 = S, 3 = W)
 	 */
 	public int move(Organismo[] grid){
-		boolean wantsToMove = Math.random() < 0.5;
 		int available = 0;
 		int destination = 0;
-		int move = -1;
-		if(wantsToMove){
-			// Odd cells in the grid are those where the organism can move
+		int move = -10; // Default: the beast is dead and should be removed or managed
+		if(isAlive){
+			move = -1; // New default: no move.
+			// Odd cells in the grid are those where the predator can move
 			for(int i = 1; i < 8; i += 2){ 
 				if(grid[i] == null) available++;
+				if(grid[i] instanceof Preda) return hunt(i); // Prey found, let's go for the kill!
 			}
 			// If there are available cells, chose one and move there
 			if(available > 0){
