@@ -18,7 +18,7 @@ public class Predatore extends Organismo {
 	 * Kills the predator, otherwise it ignores any request to revive it.
 	 * @param life true is alive, false if dead
 	 */
-	public void setName(boolean isAlive) {
+	public void setIsAlive(boolean isAlive) {
 		if (!isAlive) this.isAlive = false;
 	}
 	
@@ -92,7 +92,7 @@ public class Predatore extends Organismo {
 			if(available > 0){
 				destination = (int)(Math.random() * available); // 0, 1, 2 or 3
 				for(int i = 1; i < 8 && destination >= 0; i += 2){ 
-					offspring++;
+					if(destination == 0) offspring = i;
 					if(grid[i] == null) destination--;
 				}
 			}
@@ -125,11 +125,12 @@ public class Predatore extends Organismo {
 			if(available > 0){
 				destination = (int)(Math.random() * available); // 0, 1, 2 or 3
 				for(int i = 1; i < 8 && destination >= 0; i += 2){ 
-					move++;
+					if(destination == 0) move = i;
 					if(grid[i] == null) destination--;
 				}
 			}
 		}
+		if(--daysUntilStarve == 0) setIsAlive(false);
 		return move;
 	};
 

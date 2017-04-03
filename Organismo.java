@@ -84,7 +84,7 @@ public abstract class Organismo {
 			if(available > 0){
 				destination = (int)(Math.random() * available); // 0, 1, 2 or 3
 				for(int i = 1; i < 8 && destination >= 0; i += 2){ 
-					move++;
+					if(destination == 0) move = i;
 					if(grid[i] == null) destination--;
 				}
 			}

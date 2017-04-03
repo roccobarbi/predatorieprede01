@@ -32,8 +32,8 @@ public class Preda extends Organismo {
 	 */
 	public int reproduce(Organismo[] grid){
 		int offspring = -1;
-		int available = -1;
-		int destination = -1;
+		int available = 0;
+		int destination = 0;
 		if(nextOffspring == 0){
 			for(int i = 1; i < 8; i +=2){
 				if(grid[i] == null) available++; // check if the cell is empty and flag it as available
