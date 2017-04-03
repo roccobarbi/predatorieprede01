@@ -2,7 +2,6 @@ package predatorieprede01;
 
 import static org.junit.Assert.*;
 
-import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 public class PredaTest {
