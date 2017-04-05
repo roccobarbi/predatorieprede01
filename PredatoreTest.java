@@ -55,6 +55,32 @@ public class PredatoreTest {
 		grid[5] = preda1;
 		int move = predatore1.move(grid);
 		System.out.println("Move result = " + move);
-		assertTrue("Preda didn't move to attack the prey!", move == 5);
+		assertTrue("Predatore didn't move to attack the prey!", move == 5);
+	}
+	
+	@Test
+	public void testMove002() {
+		Predatore predatore1 = new Predatore("predatore1", "specie1", 1000, 'X', 0);
+		Predatore predatore2 = new Predatore("predatore2", "specie2", 1000, 'X', 0);
+		for(int i = 0; i < 8; i++) grid[i] = predatore2;
+		int move = predatore1.move(grid);
+		System.out.println("Move result = " + move);
+		assertTrue("Predatore moved with full grid and no prey!", move == -1);
+	}
+	
+	@Test
+	public void testMove003() {
+		Predatore predatore1 = new Predatore("predatore1", "specie1", 1000, 'X', 0);
+		for(int i = 0; i < 8; i++) grid[i] = null;
+		int move = predatore1.move(grid);
+		assertTrue("Predatore didn't move as expected with empty grid!", move == 1 || move == 3 || move == 5 || move == 7);
+	}
+	
+	@Test
+	public void testMDie001() {
+		Predatore predatore1 = new Predatore("predatore1", "specie1", 3, 'X');
+		for(int i = 0; i < 8; i++) grid[i] = null;
+		for(int i = 0; i < 4; i++) predatore1.move(grid);
+		assertTrue("Predatore didn't starve!", predatore1.getIsAlive() == false);
 	}
 }
