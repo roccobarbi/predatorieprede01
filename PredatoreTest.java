@@ -47,4 +47,14 @@ public class PredatoreTest {
 		assertFalse("Predatore should stay dead, but it looks like it has been revived", predatore1.getIsAlive());
 	}
 
+	@Test
+	public void testMove001() {
+		Predatore predatore1 = new Predatore("predatore1", "specie1", 1000, 'X', 0);
+		Preda preda1 = new Preda("preda1", "specie1", 'o', 0);
+		for(int i = 0; i < 8; i++) grid[i] = null;
+		grid[5] = preda1;
+		int move = predatore1.move(grid);
+		System.out.println("Move result = " + move);
+		assertTrue("Preda didn't move to attack the prey!", move == 5);
+	}
 }
