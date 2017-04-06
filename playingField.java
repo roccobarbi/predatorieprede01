@@ -15,25 +15,42 @@ public class playingField {
 	
 	// Constructors
 	public playingField() {
-		initialPredators = 5;
-		initialPreys = 100;
-		width = 20;
-		height = 20;
+		this(5, 100);
 	}
 	public playingField(int initialPreys, int initialPredators){
-		this.initialPredators = initialPredators;
-		this.initialPreys = initialPreys;
-		this.width = 20;
-		this.height = 20;
+		this(initialPreys, initialPredators, 20, 20);
 	}
 	public playingField(int initialPreys, int initialPredators, int height, int width){
 		this.initialPredators = initialPredators;
 		this.initialPreys = initialPreys;
 		this.height = height;
 		this.width = width;
+		grid = new Organismo[height * width];
+		this.setField();
 	}
 	
 	// Private methods
+	
+	/**
+	 * setField
+	 */
+	private void setField(){
+		int predatori = initialPredators, prede = initialPreys, loop = 0;
+		for(int i = 0; i < grid.length; i++){ // First, basic zeroing of the grid
+			grid[i] = null;
+		}
+		while(predatori > 0 && prede > 0){ // I try until I finish predators and play
+			for(int i = 0; i < grid.length; i++){
+				if (predatori > 0 && (grid.length % initialPredators) == (0 + loop) && grid[i] == null){
+					grid[i] = new Predatore();
+					predatori--;
+				} else if (prede > 0 && (grid.length % initialPreys) == (0 + loop) && grid[i] == null) {
+					grid[i] = new Preda();
+					prede--;
+				}
+			}
+		}
+	}
 	
 	/**
 	 * Cleanly removes dead animals from the playing field.
