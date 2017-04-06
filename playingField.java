@@ -7,8 +7,6 @@ public class playingField {
 	
 	// Private fiels
 	private Organismo [] grid;
-	private Preda [] preys;
-	private Predatore [] predators;
 
 	// Accessors
 	// TODO
