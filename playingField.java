@@ -2,8 +2,10 @@ package predatorieprede01;
 
 public class playingField {
 	// Static fields
-	private static final int initialPredators = 8;
-	private static final int initialPreys = 30;
+	private final int initialPredators;
+	private final int initialPreys;
+	private final int height;
+	private final int width;
 	
 	// Private fiels
 	private Organismo [] grid;
@@ -13,7 +15,22 @@ public class playingField {
 	
 	// Constructors
 	public playingField() {
-		// TODO Auto-generated constructor stub
+		initialPredators = 5;
+		initialPreys = 100;
+		width = 20;
+		height = 20;
+	}
+	public playingField(int initialPreys, int initialPredators){
+		this.initialPredators = initialPredators;
+		this.initialPreys = initialPreys;
+		this.width = 20;
+		this.height = 20;
+	}
+	public playingField(int initialPreys, int initialPredators, int height, int width){
+		this.initialPredators = initialPredators;
+		this.initialPreys = initialPreys;
+		this.height = height;
+		this.width = width;
 	}
 	
 	// Private methods
