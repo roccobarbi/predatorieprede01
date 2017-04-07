@@ -87,7 +87,27 @@ public class playingField {
 	public int nextTurn(){
 		int result = 0;
 		// TODO: manage a turn from all points of view
+		// Loop through the grid looking for predators
+		// Make them do something
+		// Loop through the grid looking for prays
+		// Make them do something
 		return result;
+	}
+	
+	/**
+	 * prints the grid to the user's screen
+	 */
+	public void print(){
+		for(int i = 0; i < grid.length; i++){
+			if(grid[i] == null){
+				System.out.print(" ");
+			} else if (grid[i] instanceof Organismo) {
+				System.out.print(grid[i].getRepresentation());
+			}
+			if(i % width == 0){
+				System.out.println();
+			}
+		}
 	}
 
 }
