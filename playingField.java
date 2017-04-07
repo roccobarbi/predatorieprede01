@@ -32,7 +32,7 @@ public class playingField {
 	// Private methods
 	
 	/**
-	 * setField
+	 * sets up the field or resets it from scratch.
 	 */
 	private void setField(){
 		int predatori = initialPredators, prede = initialPreys, loop = 0;
