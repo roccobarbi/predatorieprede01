@@ -1,6 +1,6 @@
 package predatorieprede01;
 
-public class playingField {
+public class PlayingField {
 	// Static fields
 	private final int initialPredators;
 	private final int initialPreys;
@@ -14,13 +14,13 @@ public class playingField {
 	// TODO
 	
 	// Constructors
-	public playingField() {
-		this(5, 100);
+	public PlayingField() {
+		this(100, 5);
 	}
-	public playingField(int initialPreys, int initialPredators){
+	public PlayingField(int initialPreys, int initialPredators){
 		this(initialPreys, initialPredators, 20, 20);
 	}
-	public playingField(int initialPreys, int initialPredators, int height, int width){
+	public PlayingField(int initialPreys, int initialPredators, int height, int width){
 		this.initialPredators = initialPredators;
 		this.initialPreys = initialPreys;
 		this.height = height;
@@ -35,19 +35,17 @@ public class playingField {
 	 * sets up the field or resets it from scratch.
 	 */
 	private void setField(){
-		int predatori = initialPredators, prede = initialPreys, loop = 0;
+		int predatori = initialPredators, prede = initialPreys;
 		for(int i = 0; i < grid.length; i++){ // First, basic zeroing of the grid
 			grid[i] = null;
 		}
-		while(predatori > 0 && prede > 0){ // I try until I finish predators and play
-			for(int i = 0; i < grid.length; i++){
-				if (predatori > 0 && (grid.length % initialPredators) == (0 + loop) && grid[i] == null){
-					grid[i] = new Predatore();
-					predatori--;
-				} else if (prede > 0 && (grid.length % initialPreys) == (0 + loop) && grid[i] == null) {
-					grid[i] = new Preda();
-					prede--;
-				}
+		for(int i = 0; i < grid.length; i++){
+			if (predatori > 0 && grid[i] == null){
+				grid[i] = new Predatore();
+				predatori--;
+			} else if (i > ((grid.length - prede) / 5) && prede > 0 && grid[i] == null) {
+				grid[i] = new Preda();
+				prede--;
 			}
 		}
 	}
@@ -100,11 +98,13 @@ public class playingField {
 	public void print(){
 		for(int i = 0; i < grid.length; i++){
 			if(grid[i] == null){
-				System.out.print(" ");
-			} else if (grid[i] instanceof Organismo) {
+				System.out.print(' ');
+			} else if (grid[i] instanceof Predatore) {
+				System.out.print(grid[i].getRepresentation());
+			} else if (grid[i] instanceof Preda) {
 				System.out.print(grid[i].getRepresentation());
 			}
-			if(i % width == 0){
+			if((i + 1) % width == 0){
 				System.out.println();
 			}
 		}
