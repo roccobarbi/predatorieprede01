@@ -38,7 +38,7 @@ public abstract class Organismo {
 	/**
 	 * @return the character used to represent this organism on screen
 	 */
-	public int getRepresentation() {
+	public char getRepresentation() {
 		return representation;
 	}
 	/**
