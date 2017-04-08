@@ -39,16 +39,18 @@ public class PlayingField {
 		for(int i = 0; i < grid.length; i++){ // First, basic zeroing of the grid
 			grid[i] = null;
 		}
-		// TODO: shuffle the grid to make its layout more randomic
+		// TODO: enter predators and preys in a simple, linear fashion
 		for(int i = 0; i < grid.length; i++){
 			if (predatori > 0 && grid[i] == null){
 				grid[i] = new Predatore();
 				predatori--;
-			} else if (i > ((grid.length - prede) / 5) && prede > 0 && grid[i] == null) {
+			} else if (prede > 0 && grid[i] == null) {
 				grid[i] = new Preda();
 				prede--;
 			}
 		}
+		// Shuffle predators and preys
+		Utilities.shuffle(grid);
 	}
 	
 	/**
