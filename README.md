@@ -1,2 +1,2 @@
 # predatorieprede01
-An excercise in Java class inheritance.
+An excercise in Java class inheritance and generics.
