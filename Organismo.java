@@ -95,7 +95,7 @@ public abstract class Organismo {
 	 * It prints on screen the character that represents this organism.
 	 */
 	public void print(){
-		System.out.print(representation);
+		System.out.print(this.getRepresentation());
 	}
 	
 	// Abstract methods

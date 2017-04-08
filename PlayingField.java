@@ -114,10 +114,8 @@ public class PlayingField {
 		for(int i = 0; i < grid.length; i++){
 			if(grid[i] == null){
 				System.out.print(' ');
-			} else if (grid[i] instanceof Predatore) {
-				System.out.print(grid[i].getRepresentation());
-			} else if (grid[i] instanceof Preda) {
-				System.out.print(grid[i].getRepresentation());
+			} else {
+				grid[i].print();
 			}
 			if((i + 1) % width == 0){
 				System.out.println();
