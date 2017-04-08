@@ -15,6 +15,12 @@ public class Predatore extends Organismo {
 		return isAlive;
 	}
 	/**
+	 * @return the original days until starve
+	 */
+	public int getOriginalDaysUntilStarve() {
+		return originalDaysUntilStarve;
+	}
+	/**
 	 * Kills the predator, otherwise it ignores any request to revive it.
 	 * @param life true is alive, false if dead
 	 */
@@ -61,6 +67,9 @@ public class Predatore extends Organismo {
 		this.daysUntilStarve = daysUntilStarve;
 		this.originalDaysUntilStarve = daysUntilStarve;
 		this.isAlive = true;
+	}
+	public Predatore(Predatore parent){
+		this(parent.getName(), parent.getSpecies(), parent.getOriginalDaysUntilStarve(), parent.getRepresentation());
 	}
 	
 	// Private methods

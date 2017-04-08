@@ -24,6 +24,9 @@ public class Preda extends Organismo {
 		this.nextOffspring = nextOffspring;
 		this.originalNextOffspring = nextOffspring;
 	}
+	public Preda(Preda parent){
+		this(parent.getName(), parent.getSpecies(), parent.getRepresentation());
+	}
 	
 	/**
 	 * If the organism can reproduce (nextOffspring == 0 && ci sono spazi liberi), it does in an available cell.

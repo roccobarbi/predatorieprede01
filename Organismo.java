@@ -36,6 +36,18 @@ public abstract class Organismo {
 		this.age = age;
 	}
 	/**
+	 * @return the species
+	 */
+	public String getSpecies() {
+		return species;
+	}
+	/**
+	 * @param species the species to set
+	 */
+	public void setAge(String species) {
+		this.species = species;
+	}
+	/**
 	 * @return the character used to represent this organism on screen
 	 */
 	public char getRepresentation() {
