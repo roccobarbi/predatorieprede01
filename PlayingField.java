@@ -87,9 +87,21 @@ public class PlayingField {
 	 */
 	public int nextTurn(){
 		int result = 0;
+		Organismo around[] = new Organismo[9];
+		Predatore filler = new Predatore();
 		// TODO: manage a turn from all points of view
 		// Loop through the grid looking for predators
-		// Make them do something
+		for(int i = 0; i < grid.length; i++){
+			if(grid[i] instanceof Predatore){
+				if(i < width){
+					for(int k = 0; k < 3; k++) around[k] = filler;
+				} else {
+					// TODO: completare le regole per definire cosa c'è intorno
+					for(int k = 0; k < 3; k++) around[k] = grid[i - width - 1 + k];
+				}
+				grid[i].move(grid);
+			}
+		}
 		// Loop through the grid looking for prays
 		// Make them do something
 		return result;
