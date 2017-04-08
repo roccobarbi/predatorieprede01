@@ -142,38 +142,44 @@ public class PlayingField {
 	 */
 	public int nextTurn(){
 		int result = 0;
-		int action = -1;
+		int action = -1, position = 0;
 		Organismo around[];
 		// TODO: manage a turn from all points of view
 		// Loop through the grid looking for predators
 		for(int i = 0; i < grid.length; i++){
 			if(grid[i] instanceof Predatore){
-				around = lookAround(i);
-				action = grid[i].move(around);
+				position = i;
+				around = lookAround(position);
+				action = grid[position].move(around);
 				if(action > -1){
-					grid[action] = grid[i];
-					grid[i] = null;
+					grid[action] = grid[position];
+					grid[position] = null;
+					position = action;
 					if(action > i) i++; // To avoid moving the same animal twice.
 				}
-				action = grid[i].reproduce(around);
+				around = lookAround(position);
+				action = grid[position].reproduce(around);
 				if(action > -1){
-					grid[action] = new Predatore();
+					grid[action] = new Predatore((Predatore) grid[position]);
 				}
 			}
 		}
 		// Loop through the grid looking for preys
 		for(int i = 0; i < grid.length; i++){
 			if(grid[i] instanceof Preda){
-				around = lookAround(i);
-				action = grid[i].move(around);
+				position = i;
+				around = lookAround(position);
+				action = grid[position].move(around);
 				if(action > -1){
-					grid[action] = grid[i];
-					grid[i] = null;
+					grid[action] = grid[position];
+					grid[position] = null;
+					position = action;
 					if(action > i) i++; // To avoid moving the same animal twice.
 				}
-				action = grid[i].reproduce(around);
+				around = lookAround(position);
+				action = grid[position].reproduce(around);
 				if(action > -1){
-					grid[action] = new Preda();
+					grid[action] = new Preda((Preda) grid[position]);
 				}
 			}
 		}
