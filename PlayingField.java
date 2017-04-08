@@ -79,6 +79,61 @@ public class PlayingField {
 		// TODO: move, check if anyone died as a result, manage the dead, spawn if needed
 	}
 	
+	/**
+	 * Returns a grid that can be used by Organisms to look around.
+	 * @param	position	The index of the position around which it should look.
+	 * @return	an array of 8 Organismo objects (or null) around a position.
+	 */
+	private Organismo [] lookAround(int position){
+		Organismo around[] = new Organismo[8];
+		Predatore filler = new Predatore();
+		// TODO: improve and optimise
+		// Populate the upper row
+		if(position < width){
+			for(int k = 0; k < 3; k++) around[k] = filler;
+		} else {
+			if(position % width == 0){
+				around[0] = filler;
+				around[1] = grid[position - width];
+				around[2] = grid[position - width + 1];
+			} else if((position + 1) % width == 0){
+				around[0] = grid[position - width - 1];
+				around[1] = grid[position - width];
+				around[2] = filler;
+			} else{
+				for(int k = 0; k < 3; k++) around[k] = grid[position - width - 1 + k];
+			}
+		}
+		// Populate the mid section
+		if(position % width == 0){
+			around[3] = grid[position + 1];
+			around[7] = filler;
+		} else if((position + 1) % width == 0){
+			around[3] = filler;
+			around[7] = grid[position - 1];
+		} else{
+			around[3] = grid[position + 1];
+			around[7] = grid[position - 1];
+		}
+		// Populate the lower row
+		if(position > (width * (height - 1) - 1)){
+			for(int k = 4; k < 7; k++) around[k] = filler;
+		} else {
+			if(position % width == 0){
+				around[3] = filler;
+				around[4] = grid[position + width];
+				around[5] = grid[position + width + 1];
+			} else if((position + 1) % width == 0){
+				around[3] = grid[position + width - 1];
+				around[5] = grid[position + width];
+				around[5] = filler;
+			} else{
+				for(int k = 0; k < 3; k++) around[k] = grid[position + width - 1 + k];
+			}
+		}
+		return around;
+	}
+	
 	// Public methods
 	
 	/**
@@ -87,23 +142,24 @@ public class PlayingField {
 	 */
 	public int nextTurn(){
 		int result = 0;
-		Organismo around[] = new Organismo[9];
-		Predatore filler = new Predatore();
+		Organismo around[];
 		// TODO: manage a turn from all points of view
 		// Loop through the grid looking for predators
 		for(int i = 0; i < grid.length; i++){
 			if(grid[i] instanceof Predatore){
-				if(i < width){
-					for(int k = 0; k < 3; k++) around[k] = filler;
-				} else {
-					// TODO: completare le regole per definire cosa c'è intorno
-					for(int k = 0; k < 3; k++) around[k] = grid[i - width - 1 + k];
-				}
-				grid[i].move(grid);
+				around = lookAround(i);
+				grid[i].move(around);
+				grid[i].reproduce(around);
 			}
 		}
-		// Loop through the grid looking for prays
-		// Make them do something
+		// Loop through the grid looking for preys
+		for(int i = 0; i < grid.length; i++){
+			if(grid[i] instanceof Preda){
+				around = lookAround(i);
+				grid[i].move(around);
+				grid[i].reproduce(around);
+			}
+		}
 		return result;
 	}
 	
