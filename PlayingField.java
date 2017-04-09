@@ -142,7 +142,7 @@ public class PlayingField {
 	 */
 	public int nextTurn(){
 		int result = 0;
-		int action = -1, position = 0;
+		int action = -1, position = 0, destination = 0;
 		Organismo around[];
 		// TODO: manage a turn from all points of view
 		// Loop through the grid looking for predators
@@ -152,10 +152,26 @@ public class PlayingField {
 				around = lookAround(position);
 				action = grid[position].move(around);
 				if(action > -1){
-					grid[action] = grid[position];
+					switch(action){
+					case 0:
+						destination = position - width;
+						break;
+					case 1:
+						destination = position + 1;
+						break;
+					case 2:
+						destination = position + width;
+						break;
+					case 3:
+						destination = position - 1;
+						break;
+					default:
+						destination = position;
+					}
+					grid[destination] = grid[position];
 					grid[position] = null;
-					position = action;
-					if(action > i) i++; // To avoid moving the same animal twice.
+					position = destination;
+					if(destination == i + 1) i++; // To avoid moving the same animal twice.
 				}
 				around = lookAround(position);
 				action = grid[position].reproduce(around);
@@ -171,10 +187,26 @@ public class PlayingField {
 				around = lookAround(position);
 				action = grid[position].move(around);
 				if(action > -1){
-					grid[action] = grid[position];
+					switch(action){
+					case 0:
+						destination = position - width;
+						break;
+					case 1:
+						destination = position + 1;
+						break;
+					case 2:
+						destination = position + width;
+						break;
+					case 3:
+						destination = position - 1;
+						break;
+					default:
+						destination = position;
+					}
+					grid[destination] = grid[position];
 					grid[position] = null;
-					position = action;
-					if(action > i) i++; // To avoid moving the same animal twice.
+					position = destination;
+					if(destination == i + 1) i++; // To avoid moving the same animal twice.
 				}
 				around = lookAround(position);
 				action = grid[position].reproduce(around);
@@ -190,6 +222,8 @@ public class PlayingField {
 	 * prints the grid to the user's screen
 	 */
 	public void print(){
+		for(int i = 0; i < width; i++) System.out.print('-');
+		System.out.println();
 		for(int i = 0; i < grid.length; i++){
 			if(grid[i] == null){
 				System.out.print(' ');
